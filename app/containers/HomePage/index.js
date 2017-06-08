@@ -10,26 +10,32 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
-import ImageAnimation from 'components/ImageAnimation';
+import ItemsGrid from 'components/ItemsGrid';
+import fakeItems from './fakeItems';
 import messages from './messages';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  onItemClick = (item) => {
+    // Redirect to item page
+    this.props.push(`/item`);
+  }
+
   render() {
     return (
-      <ImageAnimation
-        startingWidth={400}
-        startingHeight={200}
-        startingX={400}
-        startingY={400}
-
-        endingWidth={1000}
-        endingHeight={400}
-        endingX={0}
-        endingY={0}
-
-        image={'https://s-media-cache-ak0.pinimg.com/originals/08/26/6b/08266ba5ae9c33e5522903779bd72330.jpg'}
+      <ItemsGrid
+        items={fakeItems}
+        onItemClick={this.onItemClick}
       />
     );
   }
 }
+
+const mapDispatchToProps = {
+  push,
+};
+
+export default connect(null, mapDispatchToProps)(HomePage);
