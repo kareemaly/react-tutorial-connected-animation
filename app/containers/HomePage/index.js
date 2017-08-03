@@ -14,12 +14,19 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
 import ItemsGrid from 'components/ItemsGrid';
+import { setHeroStartingStyle } from 'containers/App/actions';
 import fakeItems from './fakeItems';
 import messages from './messages';
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  onItemClick = (item) => {
+  onItemClick = (item, event) => {
+    const width = event.currentTarget.offsetWidth;
+    const height = event.currentTarget.offsetHeight;
+    const x = event.currentTarget.offsetLeft;
+    const y = event.currentTarget.offsetTop - window.scrollY;
+
+    this.props.setHeroStartingStyle({ width, height, x, y });
     // Redirect to item page
     this.props.push(`/item`);
   }
@@ -36,6 +43,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
 
 const mapDispatchToProps = {
   push,
+  setHeroStartingStyle,
 };
 
 export default connect(null, mapDispatchToProps)(HomePage);

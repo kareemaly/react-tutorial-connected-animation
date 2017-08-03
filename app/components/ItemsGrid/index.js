@@ -26,8 +26,9 @@ const Name = styled.h4`
 const ItemsGrid = ({ items, onItemClick }) => (
   <Wrapper>
     {items.map((item, index) => (
-      <Item onClick={() => onItemClick(item)} key={index}>
+      <Item key={index}>
         <Image
+          onClick={(event) => onItemClick(item, event)}
           image={item.picture}
         />
         <Name>{item.name}</Name>

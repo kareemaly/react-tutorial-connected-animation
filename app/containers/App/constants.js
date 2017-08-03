@@ -10,3 +10,4 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const SET_HERO_STARTING_STYLE = 'app/containers/App/SET_HERO_STARTING_STYLE';
